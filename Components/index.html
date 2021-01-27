@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My first Vue app</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<div id="app">
+    <h3>
+        my todo list
+    </h3>
+
+    <input type="text" placeholder="next todo" v-model="newTodo">
+
+    <button v-on:click="storeTodo">
+        add
+    </button>
+    <ol>
+        <li v-for="(todo, index) in list">
+            {{ todo }}
+            <button v-on:click="deleteAt(index)">
+                delete
+            </button>
+        </li>
+    </ol>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            newTodo: '',
+            list: ["one", "two"]
+        },
+        methods: {
+            storeTodo() {
+                this.list.push(this.newTodo);
+                this.newTodo = '';
+            },
+            deleteAt(index) {
+                this.list.splice(index, 1);
+            }
+        }
+    })
+</script>
+</html>
